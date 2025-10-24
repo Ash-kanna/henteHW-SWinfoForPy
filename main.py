@@ -1,4 +1,5 @@
 import os as opperativsystem
+mappeNavn2 = "maskin"
 
 def hvilketOprativsystem():
     #Retunerer navnet på det nåværende opprativsystemmet
@@ -44,10 +45,22 @@ def instalerteProgrammer():
     else:
         print("Vi kan ikke vsie de instalerte programmene.")
 
+def lagerMaskinMappe():
+    if not opperativsystem.path.isdir(mappeNavn2):
+        opperativsystem.mkdir(mappeNavn2)
 
+def samleAltIMappe():
+    #Samler all informasjon i en mappe
+    global mappeNavn2
+    filForOpen = open(opperativsystem.path.join(mappeNavn2, "maskinen.txt"), "w")
 
-print("Det nåværende opprativsystemmet er:", hvilketOprativsystem())
-print("Mengden ledig plass på disken er:", hvorMyeLedigPlass(), "byte")
-print("Den nåværende innloggede brukeren er: ", hvemBrukerErLoggetInn())
-print("Den nåværende IP-adressen til maskinen er:", hvilkenIPAdresse())
-print("Skriver ut de instalerte programmene: \n", instalerteProgrammer())
+    innhold = filForOpen.write("Det nåværende opprativsystemmet er:", hvilketOprativsystem(), 
+                               "\nMengden ledig plass på disken er:", hvorMyeLedigPlass(), "byte\n", 
+                               "\nDen nåværende innloggede brukeren er: ", hvemBrukerErLoggetInn(), 
+                               "\nDen nåværende IP-adressen til maskinen er:", hvilkenIPAdresse(), 
+                               "\n\nSkriver ut de instalerte programmene: \n", instalerteProgrammer())
+    print(innhold)
+    filForOpen.close()
+
+lagerMaskinMappe()
+print(samleAltIMappe())
