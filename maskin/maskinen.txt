@@ -1,0 +1,5 @@
+Opprativsystemmet er:  nt 
+Mengden ledig plass er:  57.146636962890625 
+Innloggede brukeren er:  adeah. 
+IP-adressen til maskinen er:  169.254.59.191 
+Skriver ut de instalerte programmene: ['Adobe', 'AppsAnywhere', 'Cerence_For_Lingit', 'Cisco Packet Tracer 8.2.2', 'Common Files', 'Fellesfiler', 'Git', 'Google', 'Internet Explorer', 'Java', 'Lenovo', 'Lingdys4', 'Lingit AS', 'Lingvoice', 'Logitech', 'Microsoft', 'Microsoft Office', 'Microsoft Office 15', 'Microsoft OneDrive', 'Microsoft Update Health Tools', 'Microsoft XNA', 'Microsoft.NET', 'ModifiableWindowsApps', 'MySQL', 'NVIDIA Corporation', 'Numecent', 'Uninstall Information', 'Viken Print', 'Windows Defender', 'Windows Defender Advanced Threat Protection', 'Windows Mail', 'Windows Media Player', 'Windows NT', 'Windows Photo Viewer', 'Windows Sidebar', 'WindowsApps', 'WindowsPowerShell', 'aseprite', 'desktop.ini']

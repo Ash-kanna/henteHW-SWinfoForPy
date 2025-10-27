@@ -1,5 +1,7 @@
 import os as opperativsystem
+from shutil import disk_usage 
 mappeNavn2 = "maskin"
+listeProgrammer = []
 
 def hvilketOprativsystem():
     #Retunerer navnet på det nåværende opprativsystemmet
@@ -9,8 +11,8 @@ def hvilketOprativsystem():
 
 def hvorMyeLedigPlass():
     #Retunerer mengden ledig plass på disken i byte
-    statvfs = opperativsystem.statvfs('/')
-    ledigPlass = statvfs.f_bavail * statvfs.f_frsize
+    statvfsVar = disk_usage('C:/').free
+    ledigPlass = statvfsVar / (2**30)
     return ledigPlass
 
 
@@ -40,7 +42,26 @@ def instalerteProgrammer():
                 print("Instalerte programmer på systemet:")
                 for program in programmer:
                     print(program)
-        except FileNotFoundError:
+                    listeProgrammer.append(program)
+        except:
+            print("Kunne ikke finne listen over installerte programmer.")
+    elif opperativsystem.name == "nt": #Windows
+        try:
+            programmer = []
+            # Sjekk Program Files mappen
+            program_files = "C:\\Program Files"
+            program_files_x86 = "C:\\Program Files (x86)"
+            
+            if opperativsystem.path.exists(program_files):
+                programmer.extend(opperativsystem.listdir(program_files))
+            if opperativsystem.path.exists(program_files_x86):
+                programmer.extend(opperativsystem.listdir(program_files_x86))
+            
+            print("Instalerte programmer på systemet:")
+            for program in sorted(set(programmer)):  # Fjern duplikater og sorter
+                print(program)
+                listeProgrammer.append(program)
+        except:
             print("Kunne ikke finne listen over installerte programmer.")
     else:
         print("Vi kan ikke vsie de instalerte programmene.")
@@ -53,14 +74,9 @@ def samleAltIMappe():
     #Samler all informasjon i en mappe
     global mappeNavn2
     filForOpen = open(opperativsystem.path.join(mappeNavn2, "maskinen.txt"), "w")
-
-    innhold = filForOpen.write("Det nåværende opprativsystemmet er:", hvilketOprativsystem(), 
-                               "\nMengden ledig plass på disken er:", hvorMyeLedigPlass(), "byte\n", 
-                               "\nDen nåværende innloggede brukeren er: ", hvemBrukerErLoggetInn(), 
-                               "\nDen nåværende IP-adressen til maskinen er:", hvilkenIPAdresse(), 
-                               "\n\nSkriver ut de instalerte programmene: \n", instalerteProgrammer())
-    print(innhold)
+    filForOpen.write(f"Opprativsystemmet er:  {hvilketOprativsystem()} \nMengden ledig plass er:  {hvorMyeLedigPlass()} \nInnloggede brukeren er:  {hvemBrukerErLoggetInn()}. \nIP-adressen til maskinen er:  {hvilkenIPAdresse()} \nSkriver ut de instalerte programmene: {listeProgrammer}")
     filForOpen.close()
 
 lagerMaskinMappe()
+instalerteProgrammer()
 print(samleAltIMappe())
